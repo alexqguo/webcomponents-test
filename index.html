@@ -17,19 +17,29 @@
                 margin: 0 auto;
                 box-sizing: border-box;
             }
+            .code {
+                font-family: courier;
+            }
         </style>
     </head>
     <body>
         <div class="container">
-            <bc-button>Test button</bc-button>
+            <bc-button>Secondary button</bc-button>
+            <br>
+            <bc-button primary>Primary button</bc-button>
         </div>
 
         <script>
             const bcButtonTemplate = document.createElement('template');
             bcButtonTemplate.innerHTML = `
                 <style>
+                    :host {
+                        all: initial;
+                        contain: content;
+                    }
+
                     :host button {
-                        background-color: orange;
+                        background-color: lightgray;
                         border: none;
                         border-radius: 1px;
                         padding: 20px;
@@ -37,19 +47,34 @@
                     }
 
                     :host button:hover {
-                        background-color: goldenrod;
+                        background-color: #e0e0e0;
+                    }
+
+                    :host([primary]) button {
+                        background-color: darkorange;
+                    }
+                    :host([primary]) button:hover {
+                        background-color: orange;
                     }
                 </style>
                 <button>
                     <slot></slot>
                 </button>`;
 
-            class BCButton extends HTMLElement {                
+            class BCButton extends HTMLElement {
+                static get observedAttributes() {
+                    return ['primary'];
+                }
+
                 constructor() {
                     super();
 
                     const shadowRoot = this.attachShadow({ mode: 'open' });
                     shadowRoot.appendChild(bcButtonTemplate.content.cloneNode(true));
+                }
+
+                attributeChangedCallback(attrName, oldVal, newVal) {
+                    console.log(attrName, oldVal, newVal);
                 }
             }
 
