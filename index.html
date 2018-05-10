@@ -27,11 +27,12 @@
             <bc-button>Secondary button</bc-button>
             <br>
             <bc-button primary>Primary button</bc-button>
+            <br>
+            <bc-button url="https://www.audible.com">Button with URL</bc-button>
         </div>
 
         <script>
-            const bcButtonTemplate = document.createElement('template');
-            bcButtonTemplate.innerHTML = `
+            const buttonRootTemplate = `
                 <style>
                     :host {
                         all: initial;
@@ -56,10 +57,10 @@
                     :host([primary]) button:hover {
                         background-color: orange;
                     }
-                </style>
-                <button>
-                    <slot></slot>
-                </button>`;
+                </style>`;
+
+            const buttonTemplate = `<button><slot></slot></button>`;
+            const linkTemplate = `<a href=""><slot></slot></a>`;
 
             class BCButton extends HTMLElement {
                 static get observedAttributes() {
@@ -70,11 +71,26 @@
                     super();
 
                     const shadowRoot = this.attachShadow({ mode: 'open' });
-                    shadowRoot.appendChild(bcButtonTemplate.content.cloneNode(true));
+                    const url = this.getAttribute('url');
+
+                    console.log(url);
+                    const template = document.createElement('template');
+
+                    if (url) {
+                        template.innerHTML = buttonRootTemplate + linkTemplate;
+                    } else {
+                        template.innerHTML = buttonRootTemplate + buttonTemplate;
+                    }
+
+                    shadowRoot.appendChild(template.content.cloneNode(true));
+
+                    if (url) {
+                        shadowRoot.querySelector('a').setAttribute('href', url);
+                    }
                 }
 
                 attributeChangedCallback(attrName, oldVal, newVal) {
-                    console.log(attrName, oldVal, newVal);
+                    console.log(`attrName: ${attrName}, oldVal: ${oldVal}, newVal: ${newVal}`);
                 }
             }
 
