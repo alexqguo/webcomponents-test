@@ -13,7 +13,6 @@ class BCElement extends HTMLElement {
         // Each element can add to this and use them more easily in attributeChangedCallback
         this.attributeChangedHandlers = {};
 
-        // console.log(this);
         // console.log(`[BCElement] cssClass: ${this.cssClass}`);
         // extraParameters
     }

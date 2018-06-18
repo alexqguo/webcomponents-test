@@ -24,12 +24,18 @@ const buttonRootTemplate = `
         :host > *:hover {
             background-color: #e0e0e0;
         }
+        :host > *:active {
+            background-color: #d6d6d6;
+        }
 
         :host([primary]) > * {
             background-color: darkorange;
         }
         :host([primary]) > *:hover {
             background-color: orange;
+        }
+        :host([primary]) > *:active {
+            background-color: #ec8d0e;
         }
 
         :host([disabled]) > * {
