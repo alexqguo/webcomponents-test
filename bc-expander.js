@@ -3,6 +3,7 @@ const expanderTemplate = `
         :host {
             all: initial;
             contain: content;
+            font-family: sans-serif;
         }
         .hidden {
             display: none;

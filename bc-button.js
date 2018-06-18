@@ -3,25 +3,47 @@ const buttonRootTemplate = `
         :host {
             all: initial;
             contain: content;
+            display: inline-block;
         }
 
-        :host button {
+        :host a {
+            color: black;
+            font-family: sans-serif;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        :host > * {
             background-color: lightgray;
             border: none;
             border-radius: 1px;
             padding: 20px;
             cursor: pointer;
+            font-size: 14px;
         }
-
-        :host button:hover {
+        :host > *:hover {
             background-color: #e0e0e0;
         }
 
-        :host([primary]) button {
+        :host([primary]) > * {
             background-color: darkorange;
         }
-        :host([primary]) button:hover {
+        :host([primary]) > *:hover {
             background-color: orange;
+        }
+
+        :host([disabled]) > * {
+            opacity: 0.5;
+            cursor: default;
+        }
+        :host([disabled])::before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            left: 0;
         }
     </style>`;
 
@@ -30,7 +52,7 @@ const linkTemplate = `<a href=""><slot></slot></a>`;
 
 class BCButton extends BCElement {
     static get observedAttributes() {
-        return ['primary'];
+        return ['primary', 'disabled'];
     }
 
     constructor() {
@@ -51,10 +73,29 @@ class BCButton extends BCElement {
         if (url) {
             shadowRoot.querySelector('a').setAttribute('href', url);
         }
+
+        this.attributeChangedHandlers.primary = this.updatePrimary.bind(this);
+        this.attributeChangedHandlers.disabled = this.updateDisabled.bind(this);
+    }
+
+    updatePrimary() {
+        // no-op. styling handles it
+    }
+
+    updateDisabled(oldVal, newVal) {
+        const root = this.shadowRoot.querySelector('button, a');
+
+        if (typeof newVal === 'undefined' || newVal === null) {
+            root.removeAttribute('aria-disabled');
+        } else {
+            root.setAttribute('aria-disabled', 'true');
+        }
     }
 
     attributeChangedCallback(attrName, oldVal, newVal) {
-        // console.log(`attrName: ${attrName}, oldVal: ${oldVal}, newVal: ${newVal}`);
+        // attributeChangedHandlers comes from BCElement
+        const handler = this.attributeChangedHandlers[attrName];
+        handler(oldVal, newVal);
     }
 }
 
