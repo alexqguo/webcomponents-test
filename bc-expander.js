@@ -12,10 +12,10 @@ const expanderTemplate = `
     <div class="bc-expander">
         <div class="content hidden"><slot name="content"></slot></div>
         <a href="">
-            <span class="hidden"><slot name="hide-text"></slot></span>
-            <span><slot name="expand-text"></slot></span>
-        </a>
-        <!-- icon goes here -->
+            <span class="hidden"><slot name="hide-text"></slot></span><!--
+            --><span><slot name="expand-text"></slot></span><!--
+        --></a>
+        <bc-icon icon-type="caret-down"/>
     </div>`;
 
 // TODO: partial-collapse mode
@@ -28,6 +28,7 @@ class BCExpander extends BCElement {
         this._expandSlot.classList.add('hidden');
         this._hideSlot.classList.remove('hidden');
         this._content.classList.remove('hidden');
+        this._icon.setAttribute('icon-type', 'caret-up');
     }
 
     _close(e) {
@@ -36,21 +37,19 @@ class BCExpander extends BCElement {
         this._expandSlot.classList.remove('hidden');
         this._hideSlot.classList.add('hidden');
         this._content.classList.add('hidden');
+        this._icon.setAttribute('icon-type', 'caret-down');
     }
 
     constructor() {
         super();
 
-        const template = document.createElement('template');
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-
-        template.innerHTML = expanderTemplate;
-        shadowRoot.appendChild(template.content.cloneNode(true));
+        const shadowRoot = this.createShadowRoot(expanderTemplate);
         shadowRoot.querySelector('.bc-expander').classList.add(...this.bcAttrs.cssClass.split(' '));
 
         this._content = this.shadowRoot.querySelector('.content');
         this._hideSlot = this.shadowRoot.querySelector('slot[name=hide-text]').parentElement;
         this._expandSlot = this.shadowRoot.querySelector('slot[name=expand-text]').parentElement;
+        this._icon = this.shadowRoot.querySelector('bc-icon');
 
         this._hideSlot.addEventListener('click', this._close.bind(this));
         this._expandSlot.addEventListener('click', this._expand.bind(this));

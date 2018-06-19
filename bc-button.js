@@ -65,16 +65,8 @@ class BCButton extends BCElement {
         super();
 
         const url = this.getAttribute('url');
-        const template = document.createElement('template');
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-
-        if (url) {
-            template.innerHTML = buttonRootTemplate + linkTemplate;
-        } else {
-            template.innerHTML = buttonRootTemplate + buttonTemplate;
-        }
-
-        shadowRoot.appendChild(template.content.cloneNode(true));
+        const templateContent = buttonRootTemplate + (url ? linkTemplate : buttonTemplate);
+        const shadowRoot = this.createShadowRoot(templateContent);
 
         if (url) {
             shadowRoot.querySelector('a').setAttribute('href', url);
@@ -96,12 +88,6 @@ class BCButton extends BCElement {
         } else {
             root.setAttribute('aria-disabled', 'true');
         }
-    }
-
-    attributeChangedCallback(attrName, oldVal, newVal) {
-        // attributeChangedHandlers comes from BCElement
-        const handler = this.attributeChangedHandlers[attrName];
-        handler(oldVal, newVal);
     }
 }
 

@@ -17,6 +17,14 @@
                 box-sizing: border-box;
                 margin-top: 50px;
             }
+            /* Would need a better place to put this */
+            @font-face {
+                font-family: 'brickcity-icons';
+                src:url('https://m.media-amazon.com/images/G/01/audibleweb/brickcity/1.0/fonts/icons/brickcity_icons_release_1-0.21._CB494056935_.woff') format('woff'),
+                    url('https://m.media-amazon.com/images/G/01/audibleweb/brickcity/1.0/fonts/icons/brickcity_icons_release_1-0.21._CB494056935_.svg') format('svg');
+                font-weight: normal;
+                font-style: normal;
+            }
         </style>
     </head>
     <body>
@@ -40,11 +48,12 @@
         </div>
 
         <div class="container">
-            third element to demo goes here
+            <bc-icon icon-type="globe"/>
         </div>
 
         <script src="./bc-element.js"></script>
         <script src="./bc-button.js"></script>
         <script src="./bc-expander.js"></script>
+        <script src="./bc-icon.js"></script>
     </body>
 </html>
