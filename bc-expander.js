@@ -15,7 +15,7 @@ const expanderTemplate = `
             <span class="hidden"><slot name="hide-text"></slot></span><!--
             --><span><slot name="expand-text"></slot></span><!--
         --></a>
-        <bc-icon icon-type="caret-down"/>
+        <bc-icon icon-type="caret-down"></bc-icon>
     </div>`;
 
 // TODO: partial-collapse mode
@@ -43,8 +43,8 @@ class BCExpander extends BCElement {
     constructor() {
         super();
 
-        const shadowRoot = this.createShadowRoot(expanderTemplate);
-        shadowRoot.querySelector('.bc-expander').classList.add(...this.bcAttrs.cssClass.split(' '));
+        this.createShadowRoot(expanderTemplate);
+        this.shadowRoot.querySelector('.bc-expander').classList.add(...this.bcAttrs.cssClass.split(' '));
 
         this._content = this.shadowRoot.querySelector('.content');
         this._hideSlot = this.shadowRoot.querySelector('slot[name=hide-text]').parentElement;

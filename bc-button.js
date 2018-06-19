@@ -65,11 +65,10 @@ class BCButton extends BCElement {
         super();
 
         const url = this.getAttribute('url');
-        const templateContent = buttonRootTemplate + (url ? linkTemplate : buttonTemplate);
-        const shadowRoot = this.createShadowRoot(templateContent);
+        this.createShadowRoot(buttonRootTemplate + (url ? linkTemplate : buttonTemplate));
 
         if (url) {
-            shadowRoot.querySelector('a').setAttribute('href', url);
+            this.shadowRoot.querySelector('a').setAttribute('href', url);
         }
 
         this.attributeChangedHandlers.primary = this.updatePrimary.bind(this);
