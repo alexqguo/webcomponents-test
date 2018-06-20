@@ -35,11 +35,22 @@
 
             <bc-button url="https://www.audible.com">Button with URL</bc-button>
 
-            <bc-button><a href="/asdf">Button with anchor</a></bc-button>
+            <bc-button primary><a href="/asdf">Button with anchor</a></bc-button>
         </div>
 
         <div class="container">
-            <bc-expander css-class="bc-class bc-other-class">
+            <bc-expander>
+                <bc-expander-content slot="content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et nunc ut nisi sollicitudin mollis. Nulla libero tortor, tincidunt a porttitor nec, tempus sed lectus. Nullam posuere faucibus ligula, at gravida magna cursus sit amet. Phasellus imperdiet massa id elit suscipit, eget mattis erat feugiat. Aenean facilisis eros suscipit interdum blandit. Mauris nec laoreet velit. Ut ut lorem nec ipsum pretium laoreet et elementum dui. Donec lacinia erat eget justo semper, ut porttitor sapien finibus.
+                </bc-expander-content>
+
+                <bc-expander-heading slot="hide-text">Hide</bc-expander-heading>
+                <bc-expander-heading slot="expand-text">Expand</bc-expander-heading>
+            </bc-expander>
+        </div>
+
+        <div class="container">
+            <bc-expander partial-collapse>
                 <bc-expander-content slot="content">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et nunc ut nisi sollicitudin mollis. Nulla libero tortor, tincidunt a porttitor nec, tempus sed lectus. Nullam posuere faucibus ligula, at gravida magna cursus sit amet. Phasellus imperdiet massa id elit suscipit, eget mattis erat feugiat. Aenean facilisis eros suscipit interdum blandit. Mauris nec laoreet velit. Ut ut lorem nec ipsum pretium laoreet et elementum dui. Donec lacinia erat eget justo semper, ut porttitor sapien finibus.
                 </bc-expander-content>
