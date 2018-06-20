@@ -64,7 +64,7 @@ class BCButton extends BCElement {
     constructor() {
         super();
 
-        const url = this.getAttribute('url');
+        const url = this.findUrlOnInit();
         this.createShadowRoot(buttonRootTemplate + (url ? linkTemplate : buttonTemplate));
 
         if (url) {
@@ -73,6 +73,25 @@ class BCButton extends BCElement {
 
         this.attributeChangedHandlers.primary = this.updatePrimary.bind(this);
         this.attributeChangedHandlers.disabled = this.updateDisabled.bind(this);
+    }
+
+    findUrlOnInit() {
+        // First check to see if there's a child anchor. The button may want to be defined this way due to 
+        // SEO reasons. Better to have an actual anchor in the page source (I think. Not an SEO expert)
+        let anchor = this.getElementsByTagName('a')[0];
+        if (anchor) {
+            this.cleanUpAnchor(anchor);
+            return anchor.href;
+        }
+
+        // Otherwise see if there's a URL attribute
+        return this.getAttribute('url');
+    }
+
+    cleanUpAnchor(anchor) {
+        let textNode = document.createTextNode(anchor.innerHTML);
+        this.removeChild(anchor);
+        this.appendChild(textNode);
     }
 
     updatePrimary() {
