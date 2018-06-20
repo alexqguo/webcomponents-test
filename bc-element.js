@@ -5,7 +5,6 @@ class BCElement extends HTMLElement {
     constructor() {
         super();
 
-        this._this = this; // maybe?
         this.bcAttrs = {
             id: this.getAttribute('id'),
             cssClass: this.getAttribute('css-class')

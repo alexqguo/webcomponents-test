@@ -53,7 +53,6 @@ class BCRatingStars extends BCElement {
     }
 
     addMouseEventListeners() {
-        this._emptyStars = this.shadowRoot.querySelectorAll('.star.empty');
         this._emptyStars.forEach(function(star) {
             star.addEventListener('mouseenter', this.handleStarHover.bind(this));
             star.addEventListener('mouseleave', this.handleStarLeave.bind(this));
@@ -61,7 +60,7 @@ class BCRatingStars extends BCElement {
     }
 
     removeMouseEventListners() {
-        // Check this._stars in case it's the first time this is being rendered and there are no stars yet
+        // Truthy check this._stars in case it's the first time this is being rendered and there are no stars yet
         this._stars && this._stars.forEach(function(star) {
             star.removeEventListener('mouseenter', this.handleStarHover);
             star.removeEventListener('mouseleave', this.handleStarLeave);
@@ -77,21 +76,17 @@ class BCRatingStars extends BCElement {
     }
 
     handleStarHover(e) {
-        let starsToFill = [];
+        let hoveredStarIndex = Number.parseInt(e.currentTarget.getAttribute('data-index'));
 
-        // TODO - use indexes
+        for (let i = hoveredStarIndex; i > 0; i--) {
+            let star = this._stars[i - 1]; // Star indexes are based at 1, not 0
+            if (star.classList.contains('full')) break;
 
-        for (let i = 0; i < this._emptyStars.length; i++) {
-            starsToFill.push(this._emptyStars[i]);
-            if (this._emptyStars[i] === e.currentTarget) break;
+            star.getElementsByTagName('bc-icon')[0].setAttribute('icon-type', 'star');
         }
-
-        starsToFill.forEach(function(star) {
-            star.querySelector('bc-icon').setAttribute('icon-type', 'star');
-        });
     }
 
-    handleStarLeave(e) {
+    handleStarLeave() {
         this._emptyStars.forEach(function(star) {
             star.querySelector('bc-icon').setAttribute('icon-type', 'star-hollow');
         });
