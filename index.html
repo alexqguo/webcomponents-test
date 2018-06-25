@@ -80,7 +80,7 @@
         </div>
 
         <div class="container">
-            Rating: 
+            Rating:
             <bc-rating-stars></bc-rating-stars>
             <bc-rating-stars star-count="4"></bc-rating-stars>
         </div>
@@ -90,5 +90,13 @@
         <script src="./bc-expander.js"></script>
         <script src="./bc-icon.js"></script>
         <script src="./bc-rating-stars.js"></script>
+
+        <script>
+            // This is all stuff for testing
+
+            // Listen to the 'rate' custom event on the first bc-rating-stars element
+            document.querySelector('bc-rating-stars')
+                .addEventListener('rate', function(e) { console.log(e.detail) });
+        </script>
     </body>
 </html>

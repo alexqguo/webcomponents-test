@@ -71,7 +71,10 @@ class BCRatingStars extends BCElement {
         let target = e.target;
 
         if (target.nodeName === 'BC-ICON') {
-            this.setAttribute('star-count', e.target.parentElement.getAttribute('data-index'));
+            let rating = e.target.parentElement.getAttribute('data-index'); // Rating is also the index
+            this.setAttribute('star-count', rating);
+            // TODO - CustomEvent constructor not supported in IE. Switch to document.createEvent?
+            this.dispatchEvent(new CustomEvent('rate', { detail: { rating: rating } }));
         }
     }
 
