@@ -1,5 +1,6 @@
 /*
 - Shadow DOM (diagram)
+- <video>
 - Shadow root, Hello there text disappears
 - Add content via template string
 */
