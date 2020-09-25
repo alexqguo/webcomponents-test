@@ -1,3 +1,8 @@
+/*
+- Inheritance from HTMLElement
+- Lifecycle methods
+*/
+
 class MyElement extends HTMLElement {
   constructor() {
     super();

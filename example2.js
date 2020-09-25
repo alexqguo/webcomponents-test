@@ -1,3 +1,7 @@
+/*
+- Inheritance from MyBaseElement
+*/
+
 class MyBaseElement extends HTMLElement {
   constructor() {
     super();

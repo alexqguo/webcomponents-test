@@ -1,6 +1,13 @@
 /*
-Add to index.html
+- More complicated example
+- Application shouldn't have to maintain template
+- HTML import
+- Self contained my-counter.html
+- Code walkthrough
+- Change value via HTML attribute, JS property
+- Custom event
 
+Add to index.html:
 <my-counter></my-counter>
 */
 

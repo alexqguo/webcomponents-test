@@ -1,3 +1,9 @@
+/*
+- Shadow DOM (diagram)
+- Shadow root, Hello there text disappears
+- Add content via template string
+*/
+
 const myTemplate = `
   <p>
     <iframe src="https://giphy.com/embed/Nx0rz3jtxtEre" width="240" height="120" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
@@ -7,12 +13,12 @@ const myTemplate = `
 class MyElement extends HTMLElement {
   constructor() {
     super();
-    const shadowRoot = this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: 'open' });
 
     // Set up the content via template
     const template = document.createElement('template');
     template.innerHTML = myTemplate;
-    shadowRoot.appendChild(template.content.cloneNode(true));
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 }
 

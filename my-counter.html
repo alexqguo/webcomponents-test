@@ -29,7 +29,7 @@
 
       // Set up shadow root content
       const template = document.getElementById('my-counter-template');
-      this.attachShadow({ mode: 'closed' }); // Sets this.shadowRoot
+      this.attachShadow({ mode: 'open' });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
 
       this.display = this.shadowRoot.querySelector('span');
@@ -60,6 +60,11 @@
     // We're only listening to changes on "value" (see observedAttributes above)
     attributeChangedCallback(name, oldVal, newVal) {
       this.display.innerText = this.value;
+
+      // Fire custom event
+      this.dispatchEvent(new CustomEvent('valueChange', {
+        detail: { value: +this.value },
+      }));
     }
 
     increment() {

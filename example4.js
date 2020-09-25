@@ -1,3 +1,9 @@
+/*
+- Two methods of adding styles
+- No conflicts with rest of page
+- A few exceptions to inheriting global styles
+*/
+
 const myTemplate = `
   <style>
     p {
@@ -17,7 +23,7 @@ class MyElement extends HTMLElement {
     super();
     const shadowRoot = this.attachShadow({ mode: 'open' });
 
-    // External styles
+    // Apply external stylesheet
     const link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('href', 'shadowstyles.css');
