@@ -22,3 +22,7 @@ link.href = 'my-counter.html';
 
 document.body.appendChild(script);
 document.body.appendChild(link);
+
+document.querySelector('my-counter').addEventListener('valueChange', (e) => {
+  console.log(e.detail);
+});
