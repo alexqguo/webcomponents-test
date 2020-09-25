@@ -1,102 +1,43 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Web components test</title>
+<head>
+  <title>My web components demo</title>
+  <style>
+    body {
+      margin: 40px;
+      font-family: sans-serif;
+      font-size: 14px;
+    }
+    p {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to my demo!</h1>
+  <p>
+    This is my underlined paragraph.
+  </p>
+  <ul>
+    <li>
+      <a href="https://media.prod.mdn.mozit.cloud/attachments/2018/01/29/15788/9d23f749f26b93a00f5c2aa72f00e720/shadow-dom.png" target="_blank">
+        Link to shadow dom image
+      </a>
+    </li>
+  </ul>
 
-        <style>
-            body {
-                margin: 40px 0 0;
-                font-family: sans-serif;
-            }
-            .container {
-                width: 1000px;
-                padding: 0 10px;
-                margin: 0 auto;
-                box-sizing: border-box;
-                margin-top: 50px;
-            }
-            /* Would need a better place to put this */
-            @font-face {
-                font-family: 'brickcity-icons';
-                src:url('https://m.media-amazon.com/images/G/01/audibleweb/brickcity/1.0/fonts/icons/brickcity_icons_release_1-0.21._CB494056935_.woff') format('woff'),
-                    url('https://m.media-amazon.com/images/G/01/audibleweb/brickcity/1.0/fonts/icons/brickcity_icons_release_1-0.21._CB494056935_.svg') format('svg');
-                font-weight: normal;
-                font-style: normal;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <bc-button>Secondary button</bc-button>
+  <my-element>Hello there!</my-element>
+  <!-- <my-counter></my-counter> -->
 
-            <bc-button primary>Primary button</bc-button>
+  <!-- <script src="example1.js"></script> -->
+  <!-- <script src="example2.js"></script> -->
+  <!-- <script src="example3.js"></script> -->
+  <!-- <script src="example4.js"></script> -->
+  <!-- <script src="example5.js"></script> -->
+  <!-- <script src="example6.js"></script> -->
 
-            <bc-button url="https://www.audible.com">Button with URL</bc-button>
-
-            <bc-button primary><a href="/asdf">Button with anchor</a></bc-button>
-        </div>
-
-        <div class="container">
-            <bc-expander>
-                <bc-expander-content slot="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et nunc ut nisi sollicitudin mollis. Nulla libero tortor, tincidunt a porttitor nec, tempus sed lectus. Nullam posuere faucibus ligula, at gravida magna cursus sit amet. Phasellus imperdiet massa id elit suscipit, eget mattis erat feugiat. Aenean facilisis eros suscipit interdum blandit. Mauris nec laoreet velit. Ut ut lorem nec ipsum pretium laoreet et elementum dui. Donec lacinia erat eget justo semper, ut porttitor sapien finibus.
-                </bc-expander-content>
-
-                <bc-expander-heading slot="hide-text">Hide</bc-expander-heading>
-                <bc-expander-heading slot="expand-text">Expand</bc-expander-heading>
-            </bc-expander>
-        </div>
-
-        <div class="container">
-            <bc-expander partial-collapse>
-                <bc-expander-content slot="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et nunc ut nisi sollicitudin mollis. Nulla libero tortor, tincidunt a porttitor nec, tempus sed lectus. Nullam posuere faucibus ligula, at gravida magna cursus sit amet. Phasellus imperdiet massa id elit suscipit, eget mattis erat feugiat. Aenean facilisis eros suscipit interdum blandit. Mauris nec laoreet velit. Ut ut lorem nec ipsum pretium laoreet et elementum dui. Donec lacinia erat eget justo semper, ut porttitor sapien finibus.
-                </bc-expander-content>
-
-                <bc-expander-heading slot="hide-text">Hide</bc-expander-heading>
-                <bc-expander-heading slot="expand-text">Expand</bc-expander-heading>
-            </bc-expander>
-        </div>
-
-        <div class="container">
-            <bc-icon icon-type="globe"></bc-icon>
-            <bc-icon icon-type="play"></bc-icon>
-            <bc-icon icon-type="gift"></bc-icon>
-
-            &nbsp;&nbsp;&nbsp;
-
-            <bc-icon icon-type="instagram" icon-size="medium"></bc-icon>
-            <bc-icon icon-type="maximize-screen" icon-size="medium"></bc-icon>
-            <bc-icon icon-type="info-circle" icon-size="medium"></bc-icon>
-
-            &nbsp;&nbsp;&nbsp;
-            
-            <bc-icon icon-type="calendar" icon-size="large"></bc-icon>
-            <bc-icon icon-type="location" icon-size="large"></bc-icon>
-            <bc-icon icon-type="cart" icon-size="large"></bc-icon>
-            
-        </div>
-
-        <div class="container">
-            Rating:
-            <bc-rating-stars></bc-rating-stars>
-            <bc-rating-stars star-count="4"></bc-rating-stars>
-        </div>
-
-        <script src="./bc-element.js"></script>
-        <script src="./bc-button.js"></script>
-        <script src="./bc-expander.js"></script>
-        <script src="./bc-icon.js"></script>
-        <script src="./bc-rating-stars.js"></script>
-
-        <script>
-            // This is all stuff for testing
-
-            // Listen to the 'rate' custom event on the first bc-rating-stars element
-            document.querySelector('bc-rating-stars')
-                .addEventListener('rate', function(e) { console.log(e.detail) });
-        </script>
-    </body>
+  <!--
+    while true; do copydevpages; echo -n "Copied "; date; sleep 2; done
+  -->
+</body>
 </html>

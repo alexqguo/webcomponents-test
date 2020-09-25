@@ -1,0 +1,84 @@
+<template id="my-counter-template">
+  <style>
+    button {
+      background-color: pink;
+      font-weight: bold;
+      border: 0;
+      border-radius: 6px;
+      font-size: 16px;
+      padding: 5px;
+      width: 30px;
+      cursor: pointer;
+      outline: none;
+    }
+    
+    button:active {
+      background-color: violet;
+    }
+  </style>
+
+  <button decrement>-</button>
+  <span></span>
+  <button increment>+</button>
+</template>
+
+<script>
+  class MyCounter extends HTMLElement {
+    constructor() {
+      super();
+
+      // Set up shadow root content
+      const template = document.getElementById('my-counter-template');
+      this.attachShadow({ mode: 'closed' }); // Sets this.shadowRoot
+      this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+      this.display = this.shadowRoot.querySelector('span');
+      this.incrementBtn = this.shadowRoot.querySelector('[increment]');
+      this.decrementBtn = this.shadowRoot.querySelector('[decrement]');
+
+      this.increment = this.increment.bind(this);
+      this.decrement = this.decrement.bind(this);
+    }
+
+    static get observedAttributes() {
+      return ['value'];
+    }
+
+    connectedCallback() {
+      this.incrementBtn.addEventListener('click', this.increment);
+      this.decrementBtn.addEventListener('click', this.decrement);
+      
+      if (!this.hasAttribute('value')) {
+        this.setAttribute('value', 0);
+      }
+    }
+
+    disconnectedCallback() {
+      // Remove event listeners
+    }
+
+    // We're only listening to changes on "value" (see observedAttributes above)
+    attributeChangedCallback(name, oldVal, newVal) {
+      this.display.innerText = this.value;
+    }
+
+    increment() {
+      ++this.value;
+    }
+
+    decrement() {
+      --this.value;
+    }
+
+    // This getter/setter for the value PROPERTY is set up such that it reflects to the value ATTRIBUTE
+    get value() {
+      return this.getAttribute('value');
+    }
+
+    set value(val) {
+      this.setAttribute('value', val);
+    }
+  }
+
+  customElements.define('my-counter', MyCounter);
+</script>
